@@ -1,0 +1,15 @@
+/*与游戏相关的一些css样式表*/
+
+.roomshow{
+    float: left;
+    width: 220px;
+    height: 350px;
+    align-content: center;
+    margin-left: 10px;
+
+}
+
+.roomcover{
+    width: 200px;
+    height: 250px;
+}

@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+/*用于显示用户登录时旁边的图片*/
+article{
+    float: left;
+}
+
+div img{
+    float:left;
+}
+
+div form{
+    float:left;
+}
+
+.abc{
+    padding-top: 10px;
+    margin: 20px;
+}
+
+tr td{
+    font-size: 30px;
+    font-style: italic;
+    font-family: 行书;
+}
+
+td input{
+    height: 30px;
+}

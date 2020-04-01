@@ -1,0 +1,128 @@
+/*最后形成的css文件*/
+
+* {
+    margin: 0;
+    padding: 0;
+}/*取消整体的边界*/
+
+/*属性选择器*/
+[id*=warp]{
+    width: 950px;
+    height: auto;
+    border: 1px solid purple;
+    /*border-radius: 10px;*/
+    margin: 5px auto;
+}
+
+.on{
+    /*用来改变当导航栏中一个选项被点击跳转到该页面后，在导航栏里该页面的标记的改变*/
+    background:yellow;
+}
+
+
+main{
+    width: 960px;
+    height: 420px;
+    border:0px solid red;
+    border-radius: 2px;
+    margin: 2px auto;
+}
+
+[id*=on]{
+    border-bottom:2px dashed #ccff33;
+
+    padding-bottom:5px;
+}
+nav{
+    margin: 20px;
+}
+
+aside{
+    height: 410px;
+    float: left;
+    width: 350px;
+    border: 1px solid yellow;
+    border-radius: 1px;
+}/*这属于派生选择器*/
+
+section{
+    height: 180px;
+    width: 490px;
+    border-radius: 10px;
+    border:2px solid green;
+    margin:5px 10px;
+    overflow: scroll;
+}
+
+article{
+    height: 400px;
+    width: 510px;
+    border:0px solid blue;
+    border-radius: 5px;
+    margin: 10px 20px;
+    float: left;
+}
+
+footer{
+    height:20px;
+    font-size: 15px;
+    width:auto;
+    border:1px;
+    position: relative;;
+    button:20px;
+    bottom:0px;
+}
+
+.footer {
+    margin-top: -50px;
+    height: 50px;
+    background-color: #eee;
+    z-index: 9999;
+}/*位于相对底部的方法*/
+
+h1{
+    color:red;
+    font-family: 黑体;
+    font-size: 60px;
+    height: 65px;
+}
+
+section>p{
+    text-indent: 2em;
+    text-decoration-style: dashed;
+}
+nav.top ul{
+    height: 50px;
+    background-color: #c070ff;/*导航栏的背景颜色*/
+}
+
+nav.top ul li {
+    display: inline;/*使导航栏横向显示*/
+    color: rgba(255, 128, 81, 0.99);/*设置的是字体颜色,因为不在a标签上，所以无法实现*/
+}
+
+nav.top ul li a{
+    /*margin: 10px;*/
+    text-decoration:none;
+    padding: 5px;
+    font-size: 40px;
+    color: rgba(69, 180, 32, 0.95);
+}
+
+nav.top ul li a:hover{
+    background:yellow; /*点击超链接时的字体背景颜色,并将其他的颜色变为原来的颜色，字体也变为原来的大小*/
+}
+
+
+.box1{
+    width: 100%;
+    height: 20px;
+    float: left;
+    background-color: blue;
+}
+.box2,.box3,.box4,.box5{
+    width: 50px;
+    height:20px;
+    float: left;
+    background-color: green;
+}

@@ -1,0 +1,23 @@
+body{
+    margin:0; padding:0;
+    background-color: #200c32;
+}
+
+#divList {
+    width:1500px;
+    height: 680px;
+    margin: 0px auto;
+    overflow:hidden;
+    position: relative;
+    float: left;
+}
+
+.divText{
+    position: absolute;
+}
+
+.divText span{
+    display:block;
+    font-weight: bold;
+    font-family:Courier New;
+}
