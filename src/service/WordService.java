@@ -13,4 +13,6 @@ public interface WordService {
 
     List<Word> findWords();
 
+    Word findWord(String word);
+
 }

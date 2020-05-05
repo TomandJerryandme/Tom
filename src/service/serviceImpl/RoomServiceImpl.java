@@ -18,53 +18,63 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    public Room getRoom(int user1, int user2) {
+        return roomDAO.queryRoom(user1,user2);
+    }
+
+    @Override
     public boolean addRoom(Room room) {
         return roomDAO.insert(room);
     }
 
     @Override
-    public int getTotalCount() {
-        return roomDAO.getTotalCount();
+    public int getTotalCount(int temp) {
+        return roomDAO.getTotalCount(temp);
     }
 
     @Override
-    public int getTotalCount(int typeid) {
-        return roomDAO.getTotalCount(typeid);
+    public int getTotalCount(int typeid,int temp) {
+        return roomDAO.getTotalCount(typeid,temp);
     }
 
     @Override
-    public List<Room> getRoomList() {
-        return roomDAO.queryRoom();
+    public List<Room> getRoomList(int temp) {
+        return roomDAO.queryRoom(temp);
     }
 
     @Override
-    public List<Room> getRoomList(int currentPage, int pageSize) {
-        return roomDAO.queryRoomList(currentPage, pageSize);
+    public List<Room> getRoomList(int currentPage, int pageSize,int temp) {
+        return roomDAO.queryRoomList(currentPage, pageSize,temp);
     }
 
     @Override
-    public List<Room> getRoomList(RoomType roomType) {
-        return roomDAO.queryRoomList(roomType);
+    public List<Room> getRoomList(RoomType roomType,int temp) {
+        return roomDAO.queryRoomList(roomType,temp);
     }
 
     @Override
-    public List<Room> getRoomList(RoomType roomType, int currentPage, int pageSize) {
-        return roomDAO.queryRoomList(roomType.getTypeid(),currentPage,pageSize);
+    public List<Room> getRoomList(RoomType roomType, int currentPage, int pageSize,int temp) {
+        return roomDAO.queryRoomList(roomType.getTypeid(),currentPage,pageSize,temp);
     }
 
     @Override
-    public List<Room> getRoomList(int typeid) {
-        return roomDAO.queryRoomList(typeid);
+    public List<Room> getRoomList(int typeid,int temp) {
+        return roomDAO.queryRoomList(typeid,temp);
     }
 
     @Override
-    public List<Room> getRoomList(int typeid, int currentPage, int pageSize) {
-        return roomDAO.queryRoomList(typeid, currentPage, pageSize);
+    public List<Room> getRoomList(int typeid, int currentPage, int pageSize,int temp) {
+        return roomDAO.queryRoomList(typeid, currentPage, pageSize,temp);
     }
 
     @Override
     public List<Room> getRoomList(String roomname,int currentPage,int pageSize) {
         return roomDAO.queryRoomList(roomname,1,8);
+    }
+
+    @Override
+    public boolean HasRoom(int user1, int user2) {
+        return roomDAO.HasRoom(user1, user2);
     }
 
 }

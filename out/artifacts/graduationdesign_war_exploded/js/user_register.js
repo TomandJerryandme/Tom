@@ -10,6 +10,61 @@ function showFile(){
     }
 }
 
+function checkRegisterTel() {
+
+   /* var tel = document.getElementById("textphone").innerText;
+    var reg = "^[1]([3][0-9]{1}|59|58|88|89)[0-9]{8}$";
+
+    var teltext = document.getElementById("telephoneResult");
+    // /^1[3456789]\d{9}$/
+    if(!(/^[1]([3][0-9]{1}|59|58|88|89)[0-9]{8}$/.test(tel))){
+        //手机号码格式不正确
+        teltext.innerHTML = "<img src='/image/no.gif'><font color='red'><b>电话格式不正确</b></font>";
+    }else{
+        alert("格式正确");
+        teltext.innerHTML = "<img src='/image/yes.gif'><font color='red'><b>格式正确</b></font>";
+    }*/
+
+    $.get("/filed/check",{telephone:$("#textphone").val()},function (data) {
+        if (data=="false"){
+            var html = $("<img src='/image/no.gif'><font color='red'><b>电话格式不正确</b></font>");
+            html.appendTo($("#telephoneResult"));
+            // $("#telephoneResult").html("<img src='/image/no.gif'/><font color='red'><b>电话格式不正确</b></font>");
+        }else{
+            var html = $("<img src='/image/yes.gif'><font color='red'><b>格式正确</b></font>");
+            html.appendTo($("#telephoneResult"));
+            // $("#telephoneResult").html("<img src='/image/yes.gif'/><font color='green'><b>格式正确</b></font>");
+        }
+    })
+}
+
+function checkRegisterMail() {
+
+  /*  var mail = document.getElementById("textemail").innerText;
+
+    var mailtext = document.getElementById("mailResult");
+
+    // /^1[3456789]\d{9}$/
+    if(!(/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/.test(mail))){
+        //手机号码格式不正确
+        mailtext.innerHTML = "<img src='/image/no.gif'><font color='red'><b>邮箱格式不正确</b></font>";
+    }else{
+        mailtext.innerHTML = "<img src='/image/yes.gif'><font color='red'><b>格式正确</b></font>";
+    }*/
+
+    $.get("/filed/check",{mail:$("#textemail").val()},function (data) {
+        if (data=="false"){
+            var html = $("<img src='/image/no.gif'><font color='red'><b>邮箱格式不正确</b></font>");
+            html.appendTo($("#mailResult"));
+        }else{
+            var html = $("<img src='/image/yes.gif'><font color='red'><b>格式正确</b></font>");
+            html.appendTo($("#mailResult"));
+            // $("#mailResult").html("<img src='/image/yes.gif'/><font color='green'><b>格式正确</b></font>");
+
+        }
+    })
+}
+
 //字段级检查
 function checkUsername() {
 
@@ -18,7 +73,7 @@ function checkUsername() {
 
     if(username.value.length<1 || username.value.length>8) {
         //usernameResult.innerText = "用户名的长度必须在1-10个字符之间";
-        usernameResult.innerHTML = "<img src='/image/no.gif'/><font color='red'><b>用户名的长度必须在1-10个字符之间</b></font>";
+        usernameResult.innerHTML = "<img src='/image/no.gif'/><font color='red'><b>长度为1-8个字符</b></font>";
         return false;
     }else{
         usernameResult.innerHTML = "<img src='/image/yes.gif'/><font color='green'><b>用户名合法</b></font>";

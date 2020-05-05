@@ -38,7 +38,7 @@ function cancel() {
 }
 
 function changeMail() {
-    $.get("/user/change",{mail:$("#mailinput").val()},function (data) {
+    $.get("/user/change",{email:$("#mailinput").val()},function (data) {
         if (data=="true"){
             $("#mailspan").val("邮箱修改成功");
             location=location;
@@ -47,7 +47,7 @@ function changeMail() {
 }
 
 function changeTel() {
-    $.get("/user/change",{telephone:$("#telephoneinput").val()},function (data) {
+    $.get("/user/change",{phone:$("#telephoneinput").val()},function (data) {
         if (data=="true"){
             $("#telspan").val("电话修改成功");
             location=location;
@@ -65,7 +65,7 @@ function changeGender() {
 }
 
 function changeInterest() {
-    $.get("/user/change",{interest:$("#interestinput").val()},function (data) {
+    $.get("/user/change",{question:$("#interestinput").val(),answer:$("#jobinput").val()},function (data) {
         if (data=="true"){
             $("#interestspan").val("问题修改成功");
             location=location;
@@ -74,7 +74,7 @@ function changeInterest() {
 }
 
 function changeJob() {
-    $.get("/user/change",{job:$("#jobinput").val()},function (data) {
+    $.get("/user/change",{answer:$("#jobinput").val()},function (data) {
         if (data=="true"){
             $("#jobspan").val("答案修改成功");
             location=location;
@@ -101,6 +101,10 @@ function changePassword() {
 
     $("#password002").html("<input type='button' id='cancel' value='取消' onclick='cancel()'/><input type='button' id='ensure' value='确定' onclick='changePass()'/>");
 
+}
+
+function changeLocation() {
+    location = "password_change.jsp";
 }
 
 function changeUserGender() {
@@ -140,7 +144,7 @@ function changeUserQuestion() {
 //    在修改问题时，要连答案一同修改
     $("#answer001").html("<input type='text' id='jobinput' style='width: 300px' placeholder='请输入答案'/><span id='jobspan' style='color: #3828ff'></span>");
 
-    $("#answer002").html("<input type='button' id='cancel' value='取消' onclick='cancel()'/><input type='button' id='ensure' value='确定' onclick='changeJob()'/>");
+    $("#answer002").html();
 
 }
 
@@ -150,4 +154,11 @@ function changeUserSet() {
 
     $("#set002").html("<input type='button' id='cancel' value='取消' onclick='cancel()'/><input type='button' id='ensure' value='确定' onclick='changeSet()'/>");
 
+}
+
+
+function queryMessage() {
+    //查询信息所使用的跳转方法
+    location="/message/queryinit";
+    // location = "message_query.jsp";
 }

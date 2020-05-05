@@ -24,6 +24,7 @@ public interface UserService {
     User getUser(int id);
     User getUser(String name);
     List<User> getUserList();
+    List<User> getUserList(int typeid);
 
 
 }

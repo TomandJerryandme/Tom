@@ -15,6 +15,26 @@
     </style>
     <script src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="/js/user_register.js"></script>
+
+    <script>
+        $("#textemail").focusout(function () {
+
+            alert("离线=====")
+
+            var email = $("#textemail").val();
+
+            var parse = /^[\w\-\.]+@[a-z0-9]+(\-[a-z0-9]+)?(\.[a-z0-9]+(\-[a-z0-9]+)?)*\.[a-z]{2,4}$/i;
+            if (!parse.test(email)){
+                $("#textemail").text("对不起，您的邮箱格式不对");
+            }
+
+        });
+
+        $("#textphone").focusout(function () {
+            $("#textphone").text("对不起，您的号码格式不对");
+        });
+    </script>
+
     <script>
         function rand(min, max)
         {
@@ -74,7 +94,17 @@
 <body>
 <div id="divList">
 </div>
-<div style="margin: 0px auto">
+<div style="margin: 10px;
+            width: 780px;
+            height: 700px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);">
 <form action="/user/register" method="post" enctype="multipart/form-data">
 
     <h3 align="center"><font color="red" size="5">新用户注册</font></h3>
@@ -113,13 +143,20 @@
         <tr>
 
             <td>邮箱</td>
-            <td><input type="text" name="email" placeholder="请输入你的邮箱"></td>
+
+            <td><input type="text" name="email" placeholder="请输入你的邮箱" datatype="e" id="textemail" onblur="checkRegisterMail()">
+                <span id="mailResult"></span>
+            </td>
+
         </tr>
 
         <tr>
 
             <td>电话号码</td>
-            <td><input type="text" name="phone" placeholder="请输入你的电话号码"></td>
+            <td><input type="text" name="phone" placeholder="请输入你的电话号码" datatype="m" id="textphone" onblur="checkRegisterTel()">
+                <span id="telephoneResult"></span>
+            </td>
+
         </tr>
         <tr>
             <td>密保问题</td>

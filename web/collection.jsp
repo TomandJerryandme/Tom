@@ -17,6 +17,32 @@
     <script src="/js/jquery-3.4.1.js"></script>
     <script src="/js/game_detail.js"></script>
     <script src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.min.js"></script>
+    <style>
+        .asidestyle{
+            float: left;
+            padding: 10px;
+            /*background: #d79957;*/
+            height: 100%;
+            width: 200px;
+        }
+        .asidestyle>div{
+            /*  侧边栏中div的样式表  */
+            width: 100%;
+            text-align: center;
+            child-align: middle;
+            height: 100px;
+        }
+
+        .asidestyle>div>a{
+            font-size: 25px;
+        }
+        table{
+            height: 600px;
+        }
+        table tr td{
+            font-size: 20px;
+        }
+    </style>
     <script>
         function page(page) {
             $.get("/page/change",{page:page},function (data) {
@@ -37,7 +63,46 @@
         }
     </script>
 </head>
-<body onload="checkButton(${sessionScope.collectionpage.currentPage},${sessionScope.collectionpage.totalPage})">
+<body onload="checkButton(${sessionScope.collectionpage.currentPage},${sessionScope.collectionpage.totalPage})" style="background-image: url(images/back15.jpg);background-size: 100% 100%">
+
+<aside class="asidestyle">
+    <table>
+        <tr>
+            <div style="height: 50px; text-align: center"><img src="/image/photo/${sessionScope.user.userpic}" align="center"></div>
+        </tr>
+        <tr>
+            <div>
+                <img src="/icon/user.png" style="height: 25px;width: 25px">
+                <a href="/user_show.jsp" style="text-decoration:none">个人中心</a>
+            </div>
+        </tr>
+        <tr>
+            <div>
+                <img src="/icon/collection_fill.png" style="height: 25px;width: 25px">
+                <a href="#" onclick="shopcar()" style="text-decoration:none">我的收藏</a>
+            </div>
+        </tr>
+        <tr>
+            <div>
+                <img src="/icon/主页.png" style="height: 25px;width: 25px">
+                <a href="/index.jsp" style="text-decoration:none">网站主页</a>
+            </div>
+        </tr>
+        <tr>
+            <div>
+                <img src="/icon/联系.png" style="height: 25px;width: 25px">
+                <a href="/contact.jsp" style="text-decoration:none">联系我</a>
+            </div>
+        </tr>
+    </table>
+
+
+    <%--    <a href="#" onclick="ordershow()" style="text-decoration:none">我的购买记录</a><br/>--%>
+    <%--    <div ><a href="/user_show.jsp" style="text-decoration:none">个人中心</a><br/></div>
+
+        <div><a href="#" onclick="shopcar()" style="text-decoration:none">我的收藏</a><br/></div>--%>
+</aside>
+
 <div>
     <jsp:include page="Navigationbar.jsp"></jsp:include>
 
@@ -67,7 +132,7 @@
         <%--用来显示room，每个room的显示都是一个div，每行4-5个room，依次排列，主要是显示封面和名字--%>
         <c:forEach items="${sessionScope.collectionpage.dataList}" var="collection">
             <div class="roomshow">
-                <a href="/room/show?roomid=${collection.room.roomid}"><img src="/roomphoto/${collection.room.roomphoto}" class="roomcover"/></a><br/>
+                <a href="/room/show?roomid=${collection.room.roomid}"><img src="/roomphoto/${collection.room.truename}" class="roomcover"/></a><br/>
                 <b><i>${collection.room.roomname}</i></b>
             </div>
         </c:forEach>

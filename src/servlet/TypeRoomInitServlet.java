@@ -34,16 +34,16 @@ public class TypeRoomInitServlet extends HttpServlet {
             typeid = Integer.parseInt(gametypeid);
         }
 
+        session.setAttribute("roomType",typeid);
 
         //组合业务对象
         RoomService roomService = new RoomServiceImpl();
-
         RoomPage roomPage = new RoomPage();
         roomPage.setCurrentPage(1);
         roomPage.setPageSize(8);
-        roomPage.setTotalPage(roomService.getTotalCount(typeid));
-        roomPage.setTotalCount(roomService.getTotalCount(typeid));
-        roomPage.setDataList(roomService.getRoomList(typeid,1,8));
+        roomPage.setTotalPage(roomService.getTotalCount(typeid,0)%8==0?roomService.getTotalCount(typeid,0)/8:(roomService.getTotalCount(typeid,0)/8+1));
+        roomPage.setTotalCount(roomService.getTotalCount(typeid,0));
+        roomPage.setDataList(roomService.getRoomList(typeid,1,8,0));
         //调用业务方法
 
 

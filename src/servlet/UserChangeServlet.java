@@ -17,7 +17,6 @@ import java.io.PrintWriter;
 public class UserChangeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doGet(request,response);
-        System.out.println("abc");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,6 +34,7 @@ public class UserChangeServlet extends HttpServlet {
         String question = request.getParameter("question");
         String answer = request.getParameter("answer");
         String count = request.getParameter("count");
+        String gender = request.getParameter("gender");
 
         int count1 = 0;
 
@@ -47,6 +47,11 @@ public class UserChangeServlet extends HttpServlet {
 
         User changeUser = new User();
         changeUser = (User)session.getAttribute("user");
+
+        if (gender!=null){
+            changeUser.setGender(gender);
+        }
+
 
         if (count!=null){
             count1 = Integer.parseInt(count);
@@ -76,13 +81,19 @@ public class UserChangeServlet extends HttpServlet {
         if(question!=null){
             if (answer==null){
                 //要修改问题时，答案同时也要进行修改
-                System.out.println("问题与答案要同时进行修改");
+                out.print("<script>alert('问题与答案要同时进行修改');history.back()</script>");
+                return;
             }else{
                 changeUser.setQuestion(question);
                 changeUser.setAnswer(answer);
             }
         }
+
+        if (answer!=null){
+            changeUser.setAnswer(answer);
+        }
         if (userService.changeUserMessage(changeUser)){
+            session.setAttribute("user",changeUser);
             out.print(true);
         }
     }

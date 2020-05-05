@@ -18,25 +18,36 @@ public class MessageServiceImpl implements MessageService {
     public boolean addMessage(Message message) {
         return messageDAO.insertMessage(message);
     }
+/*
+    @Override
+    public List<Message> findMessage() {
+        return messageDAO.queryMessage();
+    }*/
 
     @Override
-    public List<Message> findMessageByType(MessageType messageType) {
-        return messageDAO.queryMessage(messageType);
+    public List<Message> findMessage(int currentPage) {
+        return messageDAO.queryMessagePage(currentPage);
     }
 
     @Override
-    public List<Message> findMessageByUser(User user) {
-        return messageDAO.queryMessage(user);
+    public List<Message> findMessage(User user,int currentPage) {
+        return messageDAO.queryMessage(user,currentPage);
     }
 
     @Override
-    public List<Message> findMessageByTime(String pass, String now) {
+    public List<Message> findMessageList() {
+        return messageDAO.queryMessageList();
+    }
+
+/*
+    @Override
+    public List<Message> findMessage(String pass, String now) {
         return messageDAO.queryMessage(pass, now);
     }
 
     @Override
-    public List<Message> findMessage() {
-        return messageDAO.queryMessage();
+    public List<Message> findMessage(MessageType messageType) {
+        return messageDAO.queryMessage(messageType);
     }
 
     @Override
@@ -68,10 +79,16 @@ public class MessageServiceImpl implements MessageService {
     public List<Message> findMessage(User user, MessageType messageType) {
         return messageDAO.queryMessage(user,null,messageType,null,null);
     }
+*/
 
     @Override
-    public List<Message> findMessage(User user, Room room, MessageType messageType, String pass, String now) {
-        return messageDAO.queryMessage(user, room, messageType, pass, now);
+    public List<Message> findMessage(User user, Room room, MessageType messageType, String pass, String now,int currentPage) {
+        return messageDAO.queryMessage(user, room, messageType, pass, now,currentPage);
+    }
+
+    @Override
+    public int getTotalCount(User user, Room room, MessageType messageType, String pass, String now) {
+        return messageDAO.getTotalCount(user, room, messageType, pass, now);
     }
 
     @Override
@@ -79,8 +96,20 @@ public class MessageServiceImpl implements MessageService {
         return messageDAO.queryMessage(roomid,count);
     }
 
+
+
     @Override
-    public Message findMessage(int messageid) {
+    public Message findMessageByID(int messageid) {
         return messageDAO.queryMessage(messageid);
+    }
+
+    @Override
+    public boolean removeMessage(int messageid){
+        return messageDAO.deleteMessage(messageid);
+    }
+
+    @Override
+    public Message findMessageManager(int userid) {
+        return messageDAO.queryMessageManager(userid);
     }
 }

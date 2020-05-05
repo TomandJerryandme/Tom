@@ -3,8 +3,15 @@ package servlet;
 import com.jspsmart.upload.SmartFile;
 import com.jspsmart.upload.SmartUpload;
 import com.jspsmart.upload.SmartUploadException;
+import entity.Room;
 import entity.User;
+import service.CountService;
+import service.RoomService;
+import service.RoomTypeService;
 import service.UserService;
+import service.serviceImpl.CountServiceImpl;
+import service.serviceImpl.RoomServiceImpl;
+import service.serviceImpl.RoomTypeServiceImpl;
 import service.serviceImpl.UserServiceImpl;
 import util.StringUtil;
 
@@ -38,7 +45,6 @@ public class UserRegisterServlet extends HttpServlet {
 
         //设置字符编码
         request.setCharacterEncoding("utf-8");
-
 
         //*****************文件上传begin*************************
         SmartUpload smartUpload = null;
@@ -141,7 +147,7 @@ public class UserRegisterServlet extends HttpServlet {
 
         //调用业务方法
         UserService userService = new UserServiceImpl();
-
+        CountService countService = new CountServiceImpl();
         //检测用户名是否可用
         if(!userService.checkUsername(username)){   //不可用
             out.print("<script>alert('对不起，用户名已存在，请重新输入');history.back()</script>");
@@ -160,20 +166,39 @@ public class UserRegisterServlet extends HttpServlet {
         user.setUsertype(false);
         user.setQuestion(question);
         user.setAnswer(answer);
-        System.out.println("photo============================"+photo);
         user.setTruename(photo);
         user.setUserpic(photo);
 
-        System.out.println("成功执行到此处------------------------");
+
         //调用注册的业务方法
         user = userService.register(user);
 
 
-
         if(user!=null){   //注册成功
 
+
+            //注册一个用户与管理员的消息房间
+            RoomTypeService roomTypeService = new RoomTypeServiceImpl();
+            Room room = new Room();
+            room.setIntroduce("");
+            room.setRoomtype(roomTypeService.getType(1));
+            room.setRoomphoto("");
+            room.setTruename("");
+            room.setType(2);
+            room.setUser1(user.getUserid());
+            room.setUser2(4);
+            room.setRoomname("通知");
+
+
+            RoomService roomService = new RoomServiceImpl();
+            roomService.addRoom(room);
+
+
+            countService.addCount(user);
             //将结果保存在属性范围中
+
             session.setAttribute("user", user);
+
 
             //更新在线人数  +1
             if(application.getAttribute("onlineCount")==null){  //第一个访客

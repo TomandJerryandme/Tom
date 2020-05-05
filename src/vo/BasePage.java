@@ -51,4 +51,9 @@ public abstract class BasePage<T> {
     public void setDataList(List<T> dataList) {
         this.dataList = dataList;
     }
+
+    @Override
+    public String toString() {
+        return "page" + dataList + "\t转义";
+    }
 }

@@ -10,8 +10,35 @@
     <link rel="stylesheet" type="text/css" href="/css/game.css">
     <script src="/js/game_small.js"></script>
     <script src="/js/jquery-3.4.1.js"></script>
+
+    <style>
+        .asidestyle{
+            float: left;
+            padding: 10px;
+            /*background: #d79957;*/
+            height: 100%;
+            width: 200px;
+        }
+        .asidestyle>div{
+            /*  侧边栏中div的样式表  */
+            width: 100%;
+            text-align: center;
+            child-align: middle;
+            height: 100px;
+        }
+
+        .asidestyle>div>a{
+            font-size: 25px;
+        }
+        table{
+            height: 600px;
+        }
+        table tr td{
+            font-size: 20px;
+        }
+    </style>
 </head>
-<body>
+<body style="background-image: url(images/back15.jpg);background-size: 100% 100%">
 
 <%--<div id="divList">这一个div是用来测试JavaScript代码的</div>--%>
 <%

@@ -2,7 +2,9 @@ package servlet;
 
 import entity.Message;
 import entity.User;
+import service.MessageService;
 import service.RoomService;
+import service.serviceImpl.MessageServiceImpl;
 import service.serviceImpl.RoomServiceImpl;
 
 import javax.servlet.ServletException;
@@ -18,20 +20,22 @@ public class MessageInitServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
 
+        //获取所有请求解除禁言的信息
+        MessageService messageService = new MessageServiceImpl();
+        List<Message> list = messageService.findMessageList();
+
+        this.getServletContext().setAttribute("releaseList",list);
+
         //组合业务对象
         RoomService roomService = new RoomServiceImpl();
-
-        //调用业务方法
-        List<Message> messageList = new ArrayList<>();
 
         Map<User,Integer> onlineList= new HashMap<>();
         this.getServletContext().setAttribute("onlineList", onlineList);
 
-
-        System.out.println("信息列表已经创建成功");
-
-        //在application属性范围中保存列表
-        this.getServletContext().setAttribute("messageList", messageList);
-
+        List<User> userList= new ArrayList<>();
+        User user = new User();
+        user.setUsername("temp");
+        userList.add(user);
+        this.getServletContext().setAttribute("onlineUserList",userList);
     }
 }

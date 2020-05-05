@@ -171,6 +171,42 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public List<User> queryUser(int typeid) {
+        String sql = "select * from graduation_user where role = ?";
+        ResultSet rs = jdbcUtil.execQuery(sql,typeid);
+
+        try {
+            List<User> list = new ArrayList<>();
+            while (rs.next()){
+                //userid,username,password,score,photo,gender,job,interest,mail,telephone,regtime,用户类型
+                //创建并填充实体对象
+                User user = new User();
+                user.setUserid(rs.getInt(1));
+                user.setUsername(rs.getString(2));
+                user.setPassword(rs.getString(3));
+                user.setUserpic(rs.getString(4));
+                user.setEmail(rs.getString(5));
+                user.setPhone(rs.getString(6));
+                user.setQuestion(rs.getString(7));
+                user.setAnswer(rs.getString(8));
+                user.setUsertype(rs.getBoolean(9));
+                user.setRegtime(rs.getDate(10));
+                user.setChatime(rs.getDate(11));
+                user.setGender(rs.getString(12));
+                user.setTruename(rs.getString(13));
+                user.setCount(rs.getInt(14));
+                list.add(user);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            jdbcUtil.closeConnection();
+        }
+        return null;  }
+
+    @Override
     public boolean insertUser(User user) {
         //userid,username,password,userpic,email,phone,question,answer,用户类型，createtime,updatetime,truename,count
         String sql = "insert into graduation_user values(null,?,?,?,?,?,?,?,?,?,?,?,?,?)";

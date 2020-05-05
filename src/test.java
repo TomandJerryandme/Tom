@@ -1,6 +1,7 @@
 import entity.*;
 import service.*;
 import service.serviceImpl.*;
+import util.StringUtil;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -9,6 +10,7 @@ import java.util.Date;
 
 public class test {
     public static void main(String[] args) {
+/*
 
         RoomTypeService roomTypeService = new RoomTypeServiceImpl();
         MessageTypeService messageTypeService = new MessageTypeServiceImpl();
@@ -72,8 +74,17 @@ public class test {
 
 
         System.out.println(userService.getUser(1));
+*/
 
-        System.out.println(messageService.findMessage(userService.getUser(1),"2020-3-27","2020-3-28"));
 
+        //
+       /* MessageService messageService = new MessageServiceImpl();
+
+        System.out.println(messageService.findMessage(1,10));
+
+        RoomService roomService = new RoomServiceImpl();
+        System.out.println(roomService.HasRoom(1,3));*/
+
+        System.out.println(StringUtil.isOK("^[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,4}$","1728703711qq.com"));
     }
 }

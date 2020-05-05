@@ -39,7 +39,7 @@ public class RoomShowServlet extends HttpServlet {
         session.setAttribute("theChosenRoom",roomService.getRoom(id));
 
         //推荐的游戏的列表reRoom
-        List<Room> rooms = roomService.getRoomList(roomService.getRoom(id).getRoomtype().getTypeid());
+        List<Room> rooms = roomService.getRoomList(roomService.getRoom(id).getRoomtype().getTypeid(),0);
 
         session.setAttribute("reRoom", rooms);
 

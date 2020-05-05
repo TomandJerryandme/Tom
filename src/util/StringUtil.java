@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /*
 -------------------------------
@@ -38,6 +40,15 @@ xx小时前发布  //3小时内
 xxxx年xx月xx日 xx时xx分发布  //超过今天
  */
 public class StringUtil {
+
+    public static boolean isOK(String pattern, String target){
+        Pattern reg = Pattern.compile(pattern);
+
+        Matcher matcher = reg.matcher(target);
+        // 字符串是否与正则表达式相匹配
+        return matcher.matches();
+    }
+
 
     public static String convertFilename(String filename){
 
@@ -216,13 +227,18 @@ public class StringUtil {
 
     }
 
-     public static void main(String[] args) throws ParseException {
-        //System.out.println(convertFilename("xxx.jpg"));
-        //System.out.println(convertDatetime("2018-9-12 14:56:20", "yyyy年MM月dd日 HH时mm分ss秒"));
-        //System.out.println(convertDatetime(new Date()));
-        //System.out.println(convertSize(123456789));
-        //System.out.println(convertKeyword("user33","3"));
-        //System.out.println(getIconFilename("xxx.bmp"));
+
+    //
+
+    public static String convertDateTime(Date date){
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(date);
+
+    }
+     public static void main(String[] args) {
+
+         System.out.println(isOK("^[1]([3][0-9]{1}|59|58|88|89)[0-9]{8}$","123"));
     }
 
 }

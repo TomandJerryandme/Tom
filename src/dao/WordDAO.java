@@ -16,4 +16,6 @@ public interface WordDAO {
 
     //检测是否有此关键字
     boolean hasWord(String word);
+
+    Word findWord(String word);
 }

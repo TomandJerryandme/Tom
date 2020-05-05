@@ -45,7 +45,7 @@ aside{
 }/*这属于派生选择器*/
 
 section{
-    height: 180px;
+    height: 300px;
     width: 740px;
     border-radius: 10px;
     border:2px solid green;
@@ -53,7 +53,7 @@ section{
 }
 
 article{
-    height: 400px;
+    height: 500px;
     width: 750px;
     border:0px solid blue;
     border-radius: 5px;

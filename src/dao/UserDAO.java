@@ -19,6 +19,7 @@ public interface UserDAO {
 
     //该方法一般是管理员来使用
     List<User> queryUser();
+    List<User> queryUser(int typeid);
 
     //删除
     boolean deleteUser(User user);

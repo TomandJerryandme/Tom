@@ -33,9 +33,10 @@ function gameDownload(id) {
 
     // location = "room_show.jsp";
     $.get("/room/chatroom",{roomid:id},function (data) {
-        if (data){
+        if (data=="true"){
             location="room_show.jsp";
-            alert("进入该聊天室");
+        }else {
+
         }
     });
 }

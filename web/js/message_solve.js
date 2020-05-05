@@ -7,9 +7,20 @@ function sendMessage(status) {
             h4.html("<span onclick='transfor()'>"+data+"</span>:"+$('#textarea').val());
             h4.appendTo($("#messageShow"));
             $("#textarea").val("");*/
-            window.location.reload();
+            // window.location.reload();
+            //$("#messageShow").attr({scrollTop:$("#messageShow").scrollHeight});
         }else{
             alert("您发送的消息里含有屏蔽字，无法发送该信息");
+        }
+    });
+}
+
+function sendPic(picname) {
+
+    //保存信息的function
+    $.get("/message/save",{picId:picname},function (data) {
+        if (data!='false'){
+        }else{
         }
     });
 }

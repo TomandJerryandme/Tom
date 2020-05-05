@@ -1,0 +1,85 @@
+/******* Menu *********/
+
+.menu {
+    height: 100%;
+    background-color:rgba(255,255,255,1);
+    width: 250px;
+    left: 0;
+    top: 0;
+    position: fixed;
+    padding: 30px 20px;
+    text-align: center;
+    z-index: 99999;
+    border-right: 1px solid #eaeaea;
+}
+.menu nav {
+    text-align: left;
+    padding: 35px 13px;
+    display: inline-block;
+    float: left;
+}
+.menu nav>a {
+    padding: 5px 0 10px;
+    position: relative;
+    display: block;
+}
+.menu nav>a:before {
+    content: "";
+    border-bottom: 1px dotted #000;
+    position: absolute;
+    left: 0;
+    top: 28px;
+    width: 10%;
+    color: #333;
+    -webkit-transition: width 1s;
+    -moz-transition: width 1s;
+    -o-transition: width 1s;
+    transition: width 1s;
+}
+.menu nav>a:hover:before, .menu nav>a:active:before, .menu nav>a.cbp-fbcurrent:before {
+    width: 100%;
+    -webkit-transition: width 1s;
+    -moz-transition: width 1s;
+    -o-transition: width 1s;
+    transition: width 1s;
+}
+.menu h1 {
+    padding-top: 13px;
+}
+.menu h1+span {
+    color: #999;
+    font-size: 15px;
+    padding-top: 7px;
+    display: block;
+}
+
+.menu h2 {
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background: url(../img/logo.png) no-repeat center;
+    height: 53px;
+}
+.menu>p {
+    position: absolute;
+    bottom: 30px;
+    text-align: center;
+    margin-left: 22px;
+    color: #838282;
+    font-size: 13px;
+}
+.menu>p span {
+    display: block;
+    padding-top: 11px;
+}
+.menu>p span:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 19px;
+    background: #999;
+    height: 1px;
+    width: 100%}
+.menu>p span a {
+    color: #000;
+}

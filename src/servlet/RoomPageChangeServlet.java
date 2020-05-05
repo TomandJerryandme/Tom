@@ -40,7 +40,7 @@ public class RoomPageChangeServlet extends HttpServlet {
         //得到page数后，对相应的页面数据进行填写到application域中的page里
         RoomService roomService = new RoomServiceImpl();
 
-        List<Room> list = roomService.getRoomList(page,8);
+        List<Room> list = roomService.getRoomList(page,8,0);
         RoomPage roomlist = (RoomPage)application.getAttribute("roompage");
         roomlist.setDataList(list);
         roomlist.setCurrentPage(page);

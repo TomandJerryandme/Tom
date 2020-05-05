@@ -2,8 +2,13 @@ package servlet;
 
 
 
+import entity.Emoji;
 import entity.User;
+import service.CountService;
+import service.EmojiService;
 import service.UserService;
+import service.serviceImpl.CountServiceImpl;
+import service.serviceImpl.EmojiServiceImpl;
 import service.serviceImpl.UserServiceImpl;
 import util.CookieUtil;
 import util.EncryptUtil;
@@ -69,7 +74,42 @@ public class UserLoginServlet extends HttpServlet {
 
         User user = userService.login(username, password);
 
-        if(user!=null){   //登录成功
+        CountService countService = new CountServiceImpl();
+
+        int legal = 0;
+
+
+        if(user!=null){   //成功找到该user
+
+            List<User> userList = (List<User>) application.getAttribute("onlineUserList");
+
+            for (User user1 : userList) {
+                if ("temp".equals(user1.getUsername())){
+                    //是初始化的一个用户，不用管
+                }else{
+                    if (user1.getUsername().equals(user.getUsername())){
+                        //该用户已经登录
+                        out.print("<script>alert('该用户已经登录');location='/user_login.jsp'</script>");
+                        return;
+                    }
+                }
+            }
+
+            //该用户未登录
+            userList.add(user);
+            application.setAttribute("onlineUserList",userList);
+
+            if (countService.getCount(user)>=10){
+                legal = 1;
+            }
+            //判断是否需要禁言
+            session.setAttribute("legal",legal);
+
+
+            //加载表情包列表
+            EmojiService emojiService = new EmojiServiceImpl();
+            List<Emoji> emojiList = emojiService.getEmojiList();
+            application.setAttribute("emojiList",emojiList);
 
             if(autoLogin!=null){
                 String ss = EncryptUtil.encrypt(username + ":" + password);
@@ -80,14 +120,12 @@ public class UserLoginServlet extends HttpServlet {
             if (user.isUsertype()){
                 //如果是管理员用户，要跳转到对应的页面
                 session.setAttribute("user", user);
-                Map<User,Integer> userList = (Map<User,Integer>) application.getAttribute("onlineList");
+                /*Map<User,Integer> userList = (Map<User,Integer>) application.getAttribute("onlineList");
                 userList.put(user,0);
-                application.setAttribute("onlineList",userList);
+                application.setAttribute("onlineList",userList);*/
                 //管理员用户可以添加room，违禁词，删除房间
                 out.print("<script>location='/user_manager_index.jsp'</script>");
 
-
-                System.out.println("我没有返回到页面上去喔！！！！！");
                 return;
             }
 

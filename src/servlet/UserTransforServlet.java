@@ -39,7 +39,7 @@ public class UserTransforServlet extends HttpServlet {
             messageId = Integer.parseInt(messageid);
         }
         MessageService messageService = new MessageServiceImpl();
-        Message message = messageService.findMessage(messageId);
+        Message message = messageService.findMessageByID(messageId);
 
         User objectUser = message.getUser();
         session.setAttribute("objectUser",objectUser);

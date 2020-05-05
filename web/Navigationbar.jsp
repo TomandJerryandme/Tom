@@ -8,6 +8,15 @@
     <link rel="stylesheet" type="text/css" href="/css/change.css">
     <link rel="stylesheet" type="text/css" href="/css/game.css">
     <link rel="stylesheet" type="text/css" href="/css/shopcar.css">
+    <script>
+        function abc() {
+            $.get("/user/logout",function (data) {
+                if (data!="false"){
+                    location = "/user_login.jsp";
+                }
+            })
+        }
+    </script>
 </head>
 <body>
 <header id="warp">
@@ -15,7 +24,7 @@
         <%--      用于显示用户的头像和用户名 --%>
         <img height="35px" width="35px" src="/image/photo/${sessionScope.user.userpic}" onclick="location='user_show.jsp';<%-- 这个onclick是用来点击后挑战到用户信息显示界面--%>">
         <b onclick="location='user_show.jsp'">${sessionScope.user.username}</b><br/>
-        <a href="/user_login.jsp" style="text-decoration:none;color: #ff314c">退出登录</a>
+        <a href="#" onclick="abc()" style="text-decoration:none;color: #ff314c">退出登录</a>
     </div>
     <h1 align="center">聊天室</h1>
 

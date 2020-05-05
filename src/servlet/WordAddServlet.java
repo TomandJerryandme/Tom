@@ -1,8 +1,10 @@
 package servlet;
 
+import entity.Word;
 import service.WordService;
 import service.serviceImpl.WordServiceImpl;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet(value = "/word/add")
 public class WordAddServlet extends HttpServlet {
@@ -24,6 +27,8 @@ public class WordAddServlet extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
         //获取out输出对象
         PrintWriter out = response.getWriter();
+
+        ServletContext application = request.getServletContext();
         //获取session对象
         HttpSession session = request.getSession();
         //设置字符编码
@@ -49,6 +54,12 @@ public class WordAddServlet extends HttpServlet {
                     }
                     //将该Word添加到屏蔽词列表中
                     if (wordService.addWord(word1)&&wordService.addWord(word2)){
+                        Word a = wordService.findWord(word1);
+                        Word b = wordService.findWord(word2);
+                        List<Word> list = (List<Word>) application.getAttribute("wordlistinit");
+                        list.add(a);
+                        list.add(b);
+                        application.setAttribute("wordlistinit",list);
                         out.print("<script>alert('屏蔽词添加成功');location='/word_add.jsp'</script>");
                     }else {
                         out.print("<script>alert('屏蔽词添加失败');history.back()</script>");

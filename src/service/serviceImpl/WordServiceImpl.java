@@ -28,4 +28,9 @@ public class WordServiceImpl implements WordService {
     public List<Word> findWords() {
         return wordDAO.queryWords();
     }
+
+    @Override
+    public Word findWord(String word) {
+        return wordDAO.findWord(word);
+    }
 }

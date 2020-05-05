@@ -3,8 +3,10 @@ package servlet;
 import entity.Message;
 import entity.Room;
 import entity.User;
+import service.CountService;
 import service.MessageService;
 import service.RoomService;
+import service.serviceImpl.CountServiceImpl;
 import service.serviceImpl.MessageServiceImpl;
 import service.serviceImpl.RoomServiceImpl;
 
@@ -27,6 +29,9 @@ public class RoomInServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        //在该servlet中，来与服务器端程序建立连接
+
         //设置输出内容类型
         response.setContentType("text/html;charset=utf-8");
         //获取out输出对象
@@ -37,7 +42,14 @@ public class RoomInServlet extends HttpServlet {
         //设置字符编码
         request.setCharacterEncoding("utf-8");
 
+        CountService countService = new CountServiceImpl();
         User user = (User) session.getAttribute("user");
+
+        if (countService.getCount(user)>=10){
+            //如果发表超过十次不当言论，系统可以直接对其进行禁言，无法进入聊天室
+            out.print("<script>alert('对不起，您发表了超过十次不当言论，您不能进入房间聊天呢！！！您可以请求解除您的禁言')</script>");
+            return;
+        }
 
         Map<User,Integer> userList = (Map<User, Integer>) application.getAttribute("onlineList");
 
@@ -47,6 +59,7 @@ public class RoomInServlet extends HttpServlet {
             id = Integer.parseInt(roomid);
         }
 
+
         userList.replace(user,id);
         application.setAttribute("onlineList",userList);
         RoomService roomService = new RoomServiceImpl();
@@ -54,7 +67,13 @@ public class RoomInServlet extends HttpServlet {
         session.setAttribute("chatroom",room);
         MessageService messageService = new MessageServiceImpl();
         List<Message> list = messageService.findMessage(id,user.getCount());
-        session.setAttribute("messageInit",list);
+
+
+        int total = messageService.getTotalCount(null,room,null,"","");
+
+        application.setAttribute("totalMessage",total);
+        application.setAttribute("messageInit",list);
+        application.setAttribute("nowCount",list.size());
         out.print(true);
     }
 }

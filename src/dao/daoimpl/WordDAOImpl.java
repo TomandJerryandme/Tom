@@ -58,4 +58,21 @@ public class WordDAOImpl implements WordDAO {
         }
         return false;
     }
+
+    @Override
+    public Word findWord(String word) {
+        String sql = "select * from graduation_word where word = ?";
+        ResultSet rs = jdbcUtil.execQuery(sql,word);
+        try{
+            if (rs.next()){
+                Word word1 = new Word();
+                word1.setId(rs.getInt(1));
+                word1.setWordContent(rs.getString(2));
+                return word1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

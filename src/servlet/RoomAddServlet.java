@@ -117,6 +117,9 @@ public class RoomAddServlet extends HttpServlet {
         room.setIntroduce(roomIntro);
         room.setRoomphoto(cover);
         room.setTruename(truename);
+        room.setType(0);
+        room.setUser1(0);
+        room.setUser2(0);
 
         if(roomService.addRoom(room)){
             out.print("<script>alert('房间添加成功');location='/room_add.jsp'</script>");
